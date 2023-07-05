@@ -1,4 +1,4 @@
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
   // app.use(
@@ -15,10 +15,10 @@ module.exports = function (app) {
     '/admin',
     createProxyMiddleware({
       logLevel: 'debug',
-      target: 'http://mht.miaodaokeji.com/admin',
+      target: '',
       changeOrigin: true,
       // 去掉我们添加的前缀，保证我们传递给后端的接口是正常的
       pathRewrite: { '^/admin': '/' },
     })
-  )
-}
+  );
+};

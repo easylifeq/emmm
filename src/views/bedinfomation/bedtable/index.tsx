@@ -1,75 +1,75 @@
-import React, { useState, useEffect } from 'react'
-import { Space, Button, Input, Select, Form, Pagination } from 'antd'
-import Detail from './details'
-import styles from './index.module.less'
-import { getBedList } from '@/api/interface.ts'
-import pic1 from '@/assets/image/1.png'
-import pic2 from '@/assets/image/2.png'
-import pic3 from '@/assets/image/3.png'
-import pic4 from '@/assets/image/4.png'
-import pic5 from '@/assets/image/5.png'
+import React, { useState, useEffect } from 'react';
+import { Space, Button, Input, Select, Form, Pagination } from 'antd';
+import Detail from './details';
+import styles from './index.module.less';
+import { getBedList } from '@/api/interface.ts';
+import pic1 from '@/assets/image/1.png';
+import pic2 from '@/assets/image/2.png';
+import pic3 from '@/assets/image/3.png';
+import pic4 from '@/assets/image/4.png';
+import pic5 from '@/assets/image/5.png';
 
 function BedTable() {
-  const [form] = Form.useForm() //搜索
-  const [workList, setWorkList] = useState({ list: {}, addNembers: false })
-  const [list, setList] = useState([])
-  const [page, setPage] = useState<number>(1)
-  const [size, setSize] = useState<number>(20)
-  const [total, setTotal] = useState<number>(0)
-  const [current, setCurrent] = useState(1)
-  const [pageSize, setPageSize] = useState(30)
-  const [bedSer, setBedSer] = useState('')
+  const [form] = Form.useForm(); //搜索
+  const [workList, setWorkList] = useState({ list: {}, addNembers: false });
+  const [list, setList] = useState([]);
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(20);
+  const [total, setTotal] = useState<number>(0);
+  const [current, setCurrent] = useState(1);
+  const [pageSize, setPageSize] = useState(30);
+  const [bedSer, setBedSer] = useState('');
 
   // 搜索
   const onSearch = () => {
     form
       .validateFields()
       .then((values) => {
-        console.log('Success:', values)
-        form.resetFields()
+        console.log('Success:', values);
+        form.resetFields();
       })
       .catch((errorInfo) => {
-        console.log('Failed:', errorInfo)
-      })
-  }
+        console.log('Failed:', errorInfo);
+      });
+  };
 
   // 重置
   const onReset = () => {
-    form.resetFields()
-  }
+    form.resetFields();
+  };
 
   const showBed = (item: any) => {
-    setWorkList({ addNembers: true, list: { item } })
-  }
+    setWorkList({ addNembers: true, list: { item } });
+  };
   const handleCancel = () => {
-    setWorkList({ list: {}, addNembers: false })
-  }
+    setWorkList({ list: {}, addNembers: false });
+  };
 
   const onPageChange = (page: any, perPage: any) => {
-    console.log(page, perPage)
+    console.log(page, perPage);
 
-    setCurrent(page)
-    setPageSize(perPage)
-  }
+    setCurrent(page);
+    setPageSize(perPage);
+  };
 
   const handleClick = (type: any) => {
-    setBedSer(type)
-  }
+    setBedSer(type);
+  };
 
   const getBed = async () => {
     const params = {
       current: current,
       pageSize: pageSize,
       search: bedSer,
-    }
-    const data = await getBedList(params)
-    setList(data.data)
-    setTotal(data.total.total)
-  }
+    };
+    const data = await getBedList(params);
+    setList(data.data);
+    setTotal(data.total.total);
+  };
 
   useEffect(() => {
-    getBed()
-  }, [current, pageSize, bedSer])
+    getBed();
+  }, [current, pageSize, bedSer]);
 
   return (
     <>
@@ -213,7 +213,7 @@ function BedTable() {
         onChange={onPageChange}
       />
     </>
-  )
+  );
 }
 
-export default BedTable
+export default BedTable;
