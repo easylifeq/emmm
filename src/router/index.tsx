@@ -1,34 +1,34 @@
-import React from 'react'
-import { lazy, Suspense } from 'react'
-import { useRoutes } from 'react-router'
+import React from 'react';
+import { lazy, Suspense } from 'react';
+import { useRoutes } from 'react-router';
 
-import Login from '../views/login/index'
-import Layout from '../views/layout/index'
-import Error from '../views/403/index'
-import Authority from '../views/authority/number'
-import Role from '../views/authority/role'
-import Information from '../views/authority/information'
-import Introduction from '../views/management/introduction'
-import Office from '../views/management/office'
-import Ward from '../views/management/ward'
-import Roomer from '../views/management/roomer'
-import Bed from '../views/management/bed'
-import Station from '../views/management/station'
-import Region from '../views/management/region'
-import BedTable from '../views/bedinfomation/bedtable'
-import Roomtable from '../views/bedinfomation/roomtable'
-import Equipment from '../views/maindevice/equipment'
-import Device from '../views/maindevice/device'
-import Devicetype from '../views/maindevice/devicetype'
-import Camera from '../views/maindevice/camera'
-import Call from '../views/group/call'
-import CallList from '../views/statistical/calllist'
-import Excel from '../views/excel'
+import Login from '../views/login/index';
+import Layout from '../views/layout/index';
+import Error from '../views/403/index';
+import Authority from '../views/authority/number';
+import Role from '../views/authority/role';
+import Information from '../views/authority/information';
+import Introduction from '../views/management/introduction';
+import Office from '../views/management/office';
+import Ward from '../views/management/ward';
+import Roomer from '../views/management/roomer';
+import Bed from '../views/management/bed';
+import Station from '../views/management/station';
+import Region from '../views/management/region';
+import BedTable from '../views/bedinfomation/bedtable';
+import Roomtable from '../views/bedinfomation/roomtable';
+import Equipment from '../views/maindevice/equipment';
+import Device from '../views/maindevice/device';
+import Devicetype from '../views/maindevice/devicetype';
+import Camera from '../views/maindevice/camera';
+import Call from '../views/group/call';
+import CallList from '../views/statistical/calllist';
+import Excel from '../views/excel';
 
 // let Auth = lazy(() => import('./auth'))
-let Index = lazy(() => import('../views/index/index'))
-let Test = lazy(() => import('../views/test/index'))
-let Tt = lazy(() => import('../views/tt/index'))
+let Index = lazy(() => import('../views/index/index'));
+let Test = lazy(() => import('../views/test/index'));
+let Tt = lazy(() => import('../views/tt/index'));
 
 export default function Routes() {
   return useRoutes([
@@ -153,7 +153,7 @@ export default function Routes() {
           ),
         },
 
-        {
+        /*    {
           // 床位一栏表
           path: 'bedtable',
           element: (
@@ -170,8 +170,8 @@ export default function Routes() {
               <Roomtable />
             </Suspense>
           ),
-        },
-        {
+        }, */
+        /*  {
           // 设备管理
           path: 'equipment',
           element: (
@@ -179,7 +179,7 @@ export default function Routes() {
               <Equipment />
             </Suspense>
           ),
-        },
+        }, */
         {
           // 设备设置
           path: 'device',
@@ -245,5 +245,5 @@ export default function Routes() {
       path: '/login',
       element: <Login />,
     },
-  ])
+  ]);
 }

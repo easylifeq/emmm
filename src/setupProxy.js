@@ -11,7 +11,7 @@ module.exports = function (app) {
   //         pathRewrite: { "^/api": '' }
   //     })
   // );
-  app.use(
+  /*  app.use(
     '/admin',
     createProxyMiddleware({
       logLevel: 'debug',
@@ -20,5 +20,5 @@ module.exports = function (app) {
       // 去掉我们添加的前缀，保证我们传递给后端的接口是正常的
       pathRewrite: { '^/admin': '/' },
     })
-  );
+  ); */
 };

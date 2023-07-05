@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import { Form, Select, message } from 'antd'
-import { getDataList } from '../../api/interface'
+import React, { useState, useEffect } from 'react';
+import { Form, Select, message } from 'antd';
+// import { getDataList } from '../../api/interface'
 
 const SearchForm = ({ onSearch }) => {
-  const { Option } = Select
-  const [form] = Form.useForm() //搜索
-  const [type, setType] = useState('ks')
-  const [firstId, setFirstId] = useState(null)
-  const [firstSelectOptions, setFirstSelectOptions] = useState([])
-  const [secondSelectOptions, setSecondSelectOptions] = useState([])
+  const { Option } = Select;
+  const [form] = Form.useForm(); //搜索
+  const [type, setType] = useState('ks');
+  const [firstId, setFirstId] = useState(null);
+  const [firstSelectOptions, setFirstSelectOptions] = useState([]);
+  const [secondSelectOptions, setSecondSelectOptions] = useState([]);
 
   const handleSecondSelectChange = (value: any) => {
-    setFirstId(value)
-    setType('bq')
-    form.setFieldsValue({ bq: undefined })
-    onSearch({ ks: value, bq: undefined })
-  }
+    setFirstId(value);
+    setType('bq');
+    form.setFieldsValue({ bq: undefined });
+    onSearch({ ks: value, bq: undefined });
+  };
 
   const handleActive = async () => {
-    const params = { type: type, dept_id: firstId }
-    const res = await getDataList(params)
+    const params = { type: type, dept_id: firstId };
+    const res = await getDataList(params);
     if (res) {
       if (type === 'ks') {
-        setFirstSelectOptions(res)
+        setFirstSelectOptions(res);
       } else if (type === 'bq') {
-        setSecondSelectOptions(res)
+        setSecondSelectOptions(res);
       }
     } else {
-      message.error('或许信息失败，请重试！')
+      message.error('或许信息失败，请重试！');
     }
-  }
+  };
 
   const handleBqChange = (value: any) => {
-    onSearch({ ks: firstId, bq: value }) // 调用 onSearch 回调函数
-  }
+    onSearch({ ks: firstId, bq: value }); // 调用 onSearch 回调函数
+  };
   // 在组件加载时请求接口并获取值
   useEffect(() => {
-    handleActive()
-  }, [type, firstId])
+    handleActive();
+  }, [type, firstId]);
 
   return (
     <>
@@ -71,7 +71,7 @@ const SearchForm = ({ onSearch }) => {
         </Form.Item>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default SearchForm
+export default SearchForm;

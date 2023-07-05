@@ -1,17 +1,17 @@
-import Mock from 'mockjs'
+import Mock from 'mockjs';
 
 Mock.mock('/login', 'post', {
   data: {
     token: '@string(10)',
   },
-})
+});
 
 Mock.mock('/auth', 'get', () => {
   return {
     code: 401,
     msg: '登录失效',
-  }
-})
+  };
+});
 
 Mock.mock('/menus', 'get', {
   data: [
@@ -105,7 +105,7 @@ Mock.mock('/menus', 'get', {
       path: '/region',
       parentId: 9,
     }, */
-    {
+    /*  {
       id: 16,
       name: '床位信息展示',
       path: '/level4',
@@ -122,7 +122,7 @@ Mock.mock('/menus', 'get', {
       name: '病房状态表',
       path: '/roomtable',
       parentId: 16,
-    },
+    }, */
     {
       id: 19,
       name: '主设备管理',
@@ -184,4 +184,4 @@ Mock.mock('/menus', 'get', {
       parentId: 19,
     }, */
   ],
-})
+});
