@@ -34,8 +34,12 @@ export default function Routes() {
   return useRoutes([
     {
       path: '/',
-      // element: <Auth><Layout></Layout></Auth>,
-      element: <Layout></Layout>,
+      element: (
+        <Auth>
+          <Layout></Layout>
+        </Auth>
+      ),
+      // element: <Layout></Layout>,
       children: [
         {
           path: 'index',

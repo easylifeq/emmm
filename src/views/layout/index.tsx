@@ -1,115 +1,87 @@
-import React, { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 // import {
 //     PieChartOutlined,
 // } from '@ant-design/icons';
 // import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd'
-import './index.less'
-import { useSelector } from 'react-redux'
-import { selectMenus } from '@/redux/loginReducer'
-import { Avatar, Dropdown } from 'antd'
-import type { MenuProps } from 'antd'
-import { UserOutlined } from '@ant-design/icons'
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import './index.less';
+import { useSelector } from 'react-redux';
+import { selectMenus } from '@/redux/loginReducer';
+import { Avatar, Dropdown } from 'antd';
+import type { MenuProps } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout
-
-// type MenuItem = Required<MenuProps>['items'][number];
-
-// function getItem(
-//     label: React.ReactNode,
-//     key: React.Key,
-//     icon?: React.ReactNode,
-//     children?: MenuItem[],
-// ): MenuItem {
-//     return {
-//         key,
-//         icon,
-//         children,
-//         label,
-//     } as MenuItem;
-// }
-
-// const items: MenuItem[] = [
-// getItem('首页', '/index', <PieChartOutlined />),
-// getItem('Option 2', '2', <DesktopOutlined />),
-// getItem('User', 'sub1', <UserOutlined />, [
-//     getItem('Tom', '3'),
-//     getItem('Bill', '4'),
-//     getItem('Alex', '5'),
-// ]),
-// getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-// getItem('Files', '9', <FileOutlined />),
-// ];
+const { Header, Content, Footer, Sider } = Layout;
 
 const LayoutWrap = () => {
-  const navigate = useNavigate()
-  const [collapsed, setCollapsed] = useState(false)
+  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
-  } = theme.useToken()
+  } = theme.useToken();
 
-  const menus = JSON.parse(JSON.stringify(useSelector(selectMenus)))
+  const menus = JSON.parse(JSON.stringify(useSelector(selectMenus)));
   const toTree = (parentId: any) => {
     const arr = menus.filter((item: any) => {
-      return item.parentId === parentId
-    })
+      return item.parentId === parentId;
+    });
     arr.forEach((item: any) => {
-      const children = toTree(item.id)
+      const children = toTree(item.id);
       if (children.length) {
-        item.children = children
+        item.children = children;
       }
-    })
+    });
     return arr.map((item: any) => {
       return {
         label: item.name,
         key: item.path,
         children: item.children,
-      }
-    })
-  }
-  const tree = toTree(0)
+      };
+    });
+  };
+  const tree = toTree(0);
   const handOnClick = (params: any) => {
-    navigate(params.key)
-  }
+    navigate(params.key);
+  };
 
-  const location = useLocation()
-  const [breadcrumb, setBreadcrumb] = useState([])
+  const location = useLocation();
+  const [breadcrumb, setBreadcrumb] = useState([]);
   useEffect(() => {
-    let result = []
-    let fisrt = menus.find((item: any) => item.path === location.pathname)
+    let result = [];
+    let fisrt = menus.find((item: any) => item.path === location.pathname);
     if (!fisrt) {
-      return
+      return;
     }
-    result.push(fisrt)
-    let parentId = fisrt.parentId
+    result.push(fisrt);
+    let parentId = fisrt.parentId;
     while (parentId) {
-      const cur = menus.find((item: any) => item.id === parentId)
+      const cur = menus.find((item: any) => item.id === parentId);
       if (cur) {
-        result.push(cur)
-        parentId = cur.parentId
+        result.push(cur);
+        parentId = cur.parentId;
       } else {
-        result = []
-        break
+        result = [];
+        break;
       }
     }
-    result.reverse()
+    result.reverse();
     const temp = result.map((item) => {
       return {
         title: item.name,
         key: item.path,
-      }
-    })
+      };
+    });
     // @ts-ignore
-    setBreadcrumb(temp)
-  }, [location.pathname])
+    setBreadcrumb(temp);
+  }, [location.pathname]);
 
   const handDropdown: MenuProps['onClick'] = ({ key }) => {
     if (key === 'logout') {
-      window.localStorage.clear()
-      navigate('/login')
+      window.localStorage.clear();
+      navigate('/login');
     }
-  }
+  };
 
   return (
     <Layout className="layout">
@@ -172,7 +144,7 @@ const LayoutWrap = () => {
         </Footer>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default LayoutWrap
+export default LayoutWrap;
